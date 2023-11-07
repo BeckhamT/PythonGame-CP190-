@@ -6,7 +6,7 @@ This project is for my college Porgramming Fundamentals Course (CP190)
 
 # Files:
 
-  map.py contains all the rooms/levels that you move around.
+  map.py contains all the rooms/levels that you move around and the functionality of moving,looking ect
 
   inventory.py contains all the items with bool values and a list of what items the charecter has
 
