@@ -3,14 +3,11 @@ import os
 import random
 import inventory as inv
 
+#VARIBLES
 txtDirection = "                  North\nYou can move:  West   East\n                  South"
 sectionDiv = "\n" *3 +"***************************************************\n"
 username = "Player"
 
-
-
-def cls():
-    os.system('cls' if os.name=='nt' else 'clear')
 
 #ROOM MENU
 def roomMenu(roomname):
@@ -45,6 +42,7 @@ def takeMenu(item):
     else:
         return False
 
+#MENU FOR THE LOOK ACTION
 def lookMenu(text):
     for i in text:
         print(i)
@@ -52,10 +50,7 @@ def lookMenu(text):
     input("\nPRESS ENTER TO CONTINUE")
 
 
-#MENU TO EXIT
-def exitMenu():
-    pass
-
+#FUNCTIONS FOR ROCK HITTING AND SWIMMING
 
 def HitRock():
     print("Ouch, that rock hurt")
@@ -70,7 +65,7 @@ def Swim():
 #################################################
 
 def Room0_0():
-    name = "Room0_0"
+    name = "Start"
     action = roomMenu(name)
     if action == "move":
         move = moveMenu()
@@ -119,7 +114,7 @@ def Room0_0():
 #################################################
 
 def Room0_1():
-    name = "Room0_1"
+    name = "Cave"
     action = roomMenu(name)
     if action == "move":
         move = moveMenu()
@@ -162,7 +157,7 @@ def Room0_1():
 #################################################
 
 def Room1_0():
-    name = "Room1_0"
+    name = "Foot Hills"
     action = roomMenu(name)
     if action == "move":
         move = moveMenu()
@@ -230,7 +225,7 @@ def Room1_0():
 #################################################
 
 def Room1_1():
-    name = "Room1_1"
+    name = "Canyon"
     action = roomMenu(name)
     if action == "move":
         move = moveMenu()
@@ -287,7 +282,7 @@ def Room1_1():
 #################################################
 
 def Room1_2():
-    name = "Room1_2"
+    name = "Swamp"
     action = roomMenu(name)
     if action == "move":
         move = moveMenu()
@@ -343,7 +338,7 @@ def Room1_2():
 #################################################
 
 def Room2_1():
-    name = "Room2_1"
+    name = "Wasteland"
     action = roomMenu(name)
     if action == "move":
         move = moveMenu()
@@ -396,7 +391,7 @@ def Room2_1():
 #################################################
 
 def Room2_2():
-    name = "Room2_2"
+    name = "Grass Plain"
     action = roomMenu(name)
     if action == "move":
         move = moveMenu()
@@ -450,7 +445,3 @@ def Room2_2():
         print("\nINVALID ACTION")
         input("\nPRESS ENTER TO CONTINUE")
         Room2_2()
-
-
-
-
