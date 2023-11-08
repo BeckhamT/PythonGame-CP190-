@@ -4,8 +4,11 @@ import os
 import random
 import inventory as inv
 
+#VARIBLES
+
 txtDirection = "                  North\nYou can move:  West   East\n                  South"
 sectionDiv = "\n" *3 +"***************************************************\n"
+
 
 class Direction:
     def __init__(self,dir,txt,level) -> None:
@@ -14,7 +17,7 @@ class Direction:
         self.level = level
     def show(self):
         print(self.txt)
-        input("")
+        input("\nPress ENTER TO CONTINUE")
 
 class Level:
     def __init__(self,name,dirs) -> None:
@@ -28,13 +31,23 @@ class Level:
         for n in options:
             print(n)
         userInput = input("\nInput: ").lower()
-        if userInput == "move":
-            self.moveMenu()
+        if userInput == "":
+            userInput = "f"
+        else:
+            userInput = userInput[0]
+        if userInput == "m":
+            return (self.moveMenu())
+        if userInput == "e":
+            return exit()
+        else:
+            print(sectionDiv)
+            input("Invalid Input\nPRESS ENTER TO CONTINUE")
+            self.menu()
     def moveMenu(self):
-        self.north = Direction("North","go",self.menu())
-        self.south = ""
-        self.west = ""
-        self.east = ""
+        self.north = self.dirs[0]
+        self.south = self.dirs[1]
+        self.west = self.dirs[2]
+        self.east = self.dirs[3]
         self.directions = (self.north,self.south,self.west,self.east)
         print(sectionDiv)
         print("MOVING\n")
@@ -45,26 +58,71 @@ class Level:
         else:
             userInput = userInput[0]
         if userInput == "s":
-            self.south
+            self.south.show()
+            return (self.south.level + ".menu()")
         elif userInput == "n":
             self.north.show()
-        elif userInput == "e":
-            self.east
+            return (self.north.level + ".menu()")
         elif userInput == "w":
-            self.west
+            self.west.show()
+            return (self.west.level + ".menu()")
+        elif userInput == "e":
+            self.east.show()
+            return (self.east.level + ".menu()")
+        else:
+            print(sectionDiv)
+            input("Invalid Input\nPRESS ENTER TO CONTINUE")
+            self.moveMenu()
+        
 
 
 
 def LevelLoader():
     pass
 
-def MenuMaker():
+def LevelMaker():
     pass
 
 def Main():
-    Level1 = Level("Level 1")
-    Level1Dirs = Direction("North","Ouch, Rock","self")
+
+    #First make the level Directions in order of North,South,West,East
+
+
+    Level0_1Dirs = (
+        Direction("North","Ouch, Rock","Level0_1"),
+        Direction("South","Entering Cave..","Level0_2"),
+        Direction("West","Ouch, Rock","Level0_1"),
+        Direction("East","You follow a path east","Level1_1"))
     
-    Level1.menu()
+    #Then create the level with the level name and directions
+
+    Level0_1 = Level("Level 0_1",Level0_1Dirs)
+
+    Level0_2Dirs = (
+        Direction("North","Backing out of Cave","Level0_1"),
+        Direction("South","If you Move Gru will eat you","Level0_2"),
+        Direction("West","If you Move Gru will eat you","Level0_2"),
+        Direction("East","If you Move Gru will eat you","Level0_2"))
+    
+    Level0_2 = Level("Level 0_2",Level0_2Dirs)
+
+
+    Level1_1Dirs = (
+        Direction("North","Backing out of Cave","Level1"),
+        Direction("South","If you Move Gru will eat you","Level2"),
+        Direction("West","If you Move Gru will eat you","Level2"),
+        Direction("East","If you Move Gru will eat you","Level2"))
+    
+    Level1_1 = Level("Level 1_1",Level1_1Dirs)
+    # The Level Meny will Return a level to call as a string ie "level0_1.menu()"
+    # Eval will turn the string into that line of code
+
+    result = Level0_1.menu()
+    while result != "exit":
+        result = eval(result)
+        print (result)
+        eval(result)
+        
+
 
 Main()
