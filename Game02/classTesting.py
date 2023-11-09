@@ -2,7 +2,6 @@ from typing import Any
 import time
 import os
 import random
-import inventory as inv
 
 #VARIBLES
 
