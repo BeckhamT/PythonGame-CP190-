@@ -76,13 +76,6 @@ class Level:
         
 
 
-
-def LevelLoader():
-    pass
-
-def LevelMaker():
-    pass
-
 def Main():
 
     #First make the level Directions in order of North,South,West,East
@@ -120,8 +113,6 @@ def Main():
     result = Level0_1.menu()
     while result != "exit":
         result = eval(result)
-        print (result)
-        eval(result)
         
 
 
