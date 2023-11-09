@@ -8,7 +8,7 @@ import inventory as inv
 
 txtDirection = "                  North\nYou can move:  West   East\n                  South"
 sectionDiv = "\n" *3 +"***************************************************\n"
-
+txtContinue = "PRESS ENTER TO CONTINUE"
 
 class Direction:
     def __init__(self,dir,txt,level) -> None:
@@ -23,6 +23,7 @@ class Level:
     def __init__(self,name,dirs) -> None:
         self.name = name
         self.dirs = dirs
+        self.txtLook = "this does nothing"
     def menu(self):
         options = ["move","take","look","exit"]
         print(sectionDiv)
@@ -37,7 +38,9 @@ class Level:
             userInput = userInput[0]
         if userInput == "m":
             return (self.moveMenu())
-        if userInput == "e":
+        elif userInput == "l":
+            return (self.lookMenu())
+        elif userInput == "e":
             return exit()
         else:
             print(sectionDiv)
@@ -73,15 +76,12 @@ class Level:
             print(sectionDiv)
             input("Invalid Input\nPRESS ENTER TO CONTINUE")
             self.moveMenu()
+    def lookMenu(self):
+        print(self.txtLook)
+        input("\n"+txtContinue)
+        self.menu()
         
 
-
-
-def LevelLoader():
-    pass
-
-def LevelMaker():
-    pass
 
 def Main():
 
@@ -97,6 +97,8 @@ def Main():
     #Then create the level with the level name and directions
 
     Level0_1 = Level("Level 0_1",Level0_1Dirs)
+
+    Level0_1.txtLook = "A grass plain"
 
     Level0_2Dirs = (
         Direction("North","Backing out of Cave","Level0_1"),
@@ -120,8 +122,6 @@ def Main():
     result = Level0_1.menu()
     while result != "exit":
         result = eval(result)
-        print (result)
-        eval(result)
         
 
 
