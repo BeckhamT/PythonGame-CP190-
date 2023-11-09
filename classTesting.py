@@ -19,6 +19,12 @@ class Direction:
         print(self.txt)
         input("\nPress ENTER TO CONTINUE")
 
+
+class Item:
+    def __init__(self,name,txt) -> None:
+        self.name = name
+        self.txt = txt
+
 class Level:
     def __init__(self,name,dirs) -> None:
         self.name = name
