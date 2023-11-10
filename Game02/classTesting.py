@@ -16,13 +16,17 @@ class Direction:
         self.level = level
     def show(self):
         print(self.txt)
-        input("\nPress ENTER TO CONTINUE")
+        input("\n"+txtContinue)
 
 
 class Item:
     def __init__(self,name,txt) -> None:
         self.name = name
         self.txt = txt
+    def show(self):
+        print(sectionDiv+ self.txt )
+        print("You found a "+ self.name)
+        answer = input("\nWould you like to take? (y/n) ")
 
 class Level:
     def __init__(self,name,dirs) -> None:
@@ -46,7 +50,10 @@ class Level:
         elif userInput == "l":
             return (self.lookMenu())
         elif userInput == "e":
-            return exit()
+            if input("Would you like to exit? (y/n) ").lower() == "y":
+                return exit()
+            else:
+                self.menu()
         else:
             print(sectionDiv)
             input("Invalid Input\nPRESS ENTER TO CONTINUE")
