@@ -12,7 +12,6 @@ txtContinue = "PRESS ENTER TO CONTINUE"
 inv = []
 
 
-
 class Direction:
     def __init__(self,dir,txt,level) -> None:
         self.dir = dir
