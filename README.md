@@ -30,7 +30,7 @@ By using classes in "Game02" it makes level creation easier but is harder to und
 
   *should probably seperate classes into other files*
 
-  main.py contains all code required for the code
+  main.py contains all the code required to run the game
 
   
 
