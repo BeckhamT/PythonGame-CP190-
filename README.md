@@ -8,13 +8,18 @@ Prof: Daniel Kaukinen
 This project is for my college Porgramming Fundamentals Course (CP190)
 
 
-# OOP vs Procedural:
+# OOP vs Functions:
+
+The orignal project "Game01" was created using functions exclusivly
 
 Testing with OOP in "Game02" to see if I can shorten the code and streamline the creation of "Rooms".
 
 By using classes in "Game02" it makes level creation easier but is harder to understand how it works 
 
 # Game01:
+
+### Notes: 
+
 
 ## Files:
 
@@ -25,6 +30,8 @@ By using classes in "Game02" it makes level creation easier but is harder to und
   gameFile.py calls map.py and assigns the username.
 
 # Game02: 
+
+### Notes: 
 
 ## Files:
 
