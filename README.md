@@ -1,8 +1,11 @@
 # PythonGame-CP190-
+Beckham Thompson
 Due October 21st 2023 
+Prof: Daniel Kaukinen
 
 
 This project is for my college Porgramming Fundamentals Course (CP190)
+
 
 ## OOP vs Procedural:
 
@@ -22,5 +25,11 @@ By using classes in "Game02" it makes level creation easier but is harder to und
 
 # Game02: 
 
-## Files: 
+## Files:
+
+  *should probably seperate classes into other files*
+
+  main.py contains all code required for the code
+
+  
 
