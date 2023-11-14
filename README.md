@@ -1,5 +1,4 @@
 # PythonGame-CP190-
-Beckham Thompson
 
 Due October 21st 2023 
 
