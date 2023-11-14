@@ -197,7 +197,7 @@ def Room1_0():
             print(sectionDiv)
             print("YOU FALL IN AND DIE!")
             input("\nPRESS ENTER TO CONTINUE")
-            Room0_0()
+            exit()
         else: 
             if inv.watch == True:
                 print("You already have this item")

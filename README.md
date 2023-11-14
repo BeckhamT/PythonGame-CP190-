@@ -4,7 +4,15 @@ Due October 21st 2023
 
 This project is for my college Porgramming Fundamentals Course (CP190)
 
-# Files:
+## OOP vs Procedural:
+
+Testing with OOP in "Game02" to see if I can shorten the code and streamline the creation of "Rooms".
+
+By using classes in "Game02" it makes level creation easier but is harder to understand how it works 
+
+# Game01:
+
+## Files:
 
   map.py contains all the rooms/levels that you move around and the functionality of moving, looking, take, and exit.
 
@@ -12,6 +20,7 @@ This project is for my college Porgramming Fundamentals Course (CP190)
 
   gameFile.py calls map.py and assigns the username.
 
-## OOP vs Procedural:
+# Game02: 
 
-Testing with OOP in "Game02" to see if I can shorten the code and streamline the creation of "Rooms".
+## Files: 
+

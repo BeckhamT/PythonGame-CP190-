@@ -9,6 +9,10 @@ txtDirection = "                  North\nYou can move:  West   East\n           
 sectionDiv = "\n" *3 +"***************************************************\n"
 txtContinue = "PRESS ENTER TO CONTINUE"
 
+inv = []
+
+
+
 class Direction:
     def __init__(self,dir,txt,level) -> None:
         self.dir = dir
@@ -18,23 +22,35 @@ class Direction:
         print(self.txt)
         input("\n"+txtContinue)
 
-
 class Item:
     def __init__(self,name,txt) -> None:
         self.name = name
         self.txt = txt
-    def show(self):
-        print(sectionDiv+ self.txt )
-        print("You found a "+ self.name)
-        answer = input("\nWould you like to take? (y/n) ")
+        self.have = False
+    def menu(self):
+        if self.name != "nothing":
+            print(sectionDiv+"\n"+self.txt+"\n")
+            print("You found a "+ self.name)
+            if self.have == False:
+                answer = input("\nWould you like to take? (y/n) ").lower()
+                if answer == "y": 
+                    self.have = True
+                    inv.append(self.name)
+            else:
+                print("You already have this item")
+                input(txtContinue)
+        else:
+            print("\nThere is nothing to take\n")
+            input(txtContinue)
 
 class Level:
-    def __init__(self,name,dirs) -> None:
+    def __init__(self,name) -> None:
         self.name = name
-        self.dirs = dirs
+        self.dirs = "this does nothing"
         self.txtLook = "this does nothing"
+        self.item = Item("nothing","nothing")
     def menu(self):
-        options = ["move","take","look","exit"]
+        options = ["move","take","look","inventory","exit"]
         print(sectionDiv)
         print(self.name)
         print ("\nOptions: \n")
@@ -48,12 +64,19 @@ class Level:
         if userInput == "m":
             return (self.moveMenu())
         elif userInput == "l":
-            return (self.lookMenu())
+            self.lookMenu()
+            return(self.name +".menu()")
+        elif userInput == "t":
+            self.takeMenu()
+            return(self.name +".menu()")
+        elif userInput == "i":
+            self.invMenu()
+            return(self.name +".menu()")
         elif userInput == "e":
             if input("Would you like to exit? (y/n) ").lower() == "y":
                 return exit()
             else:
-                self.menu()
+                return(self.name +".menu()")
         else:
             print(sectionDiv)
             input("Invalid Input\nPRESS ENTER TO CONTINUE")
@@ -89,52 +112,72 @@ class Level:
             input("Invalid Input\nPRESS ENTER TO CONTINUE")
             self.moveMenu()
     def lookMenu(self):
-        print(self.txtLook)
+        for i in self.txtLook:
+            print(i)
+            time.sleep(1)
         input("\n"+txtContinue)
         self.menu()
-        
+    def takeMenu(self):
+        self.item.menu()
+    def invMenu(self):
+        print("\nInventory:\n")
+        for i in inv:
+            print(i)
+        input("\n"+txtContinue)
 
+        
 
 def Main():
 
-    #First make the level Directions in order of North,South,West,East
+    # Create the Level with the level name
 
+    Level0_1 = Level("Level0_1")
 
-    Level0_1Dirs = (
+    # Create the Levels Direction in order North,South,West,East
+
+    Level0_1.dirs = (
         Direction("North","Ouch, Rock","Level0_1"),
         Direction("South","Entering Cave..","Level0_2"),
         Direction("West","Ouch, Rock","Level0_1"),
         Direction("East","You follow a path east","Level1_1"))
-    
-    #Then create the level with the level name and directions
 
-    Level0_1 = Level("Level 0_1",Level0_1Dirs)
+    # Create the Look txt for the level
 
-    Level0_1.txtLook = "A grass plain"
+    Level0_1.txtLook = ("You find yourself in a breathtaking forest","There are cliffs raised beside you","There is  a path to the south and the the east","There is a treasure chest in the hollow of a tree")
 
-    Level0_2Dirs = (
+    # Create the Item for the level
+
+    Level0_1.item = Item("Leather Cap","You open the chest in the tree and...")
+
+
+    Level0_2 = Level("Level0_2")
+
+    Level0_2.dirs = (
         Direction("North","Backing out of Cave","Level0_1"),
         Direction("South","If you Move Gru will eat you","Level0_2"),
         Direction("West","If you Move Gru will eat you","Level0_2"),
         Direction("East","If you Move Gru will eat you","Level0_2"))
     
-    Level0_2 = Level("Level 0_2",Level0_2Dirs)
+    Level0_2.txtLook = ("Its pitch black in this cave","You can see dalight far at the end of the cave","North is back the way you came, South is foward")
 
 
-    Level1_1Dirs = (
+    Level1_1 = Level("Level1_1")
+
+    Level1_1.dirs = (
         Direction("North","Backing out of Cave","Level1"),
         Direction("South","If you Move Gru will eat you","Level2"),
         Direction("West","If you Move Gru will eat you","Level2"),
         Direction("East","If you Move Gru will eat you","Level2"))
     
-    Level1_1 = Level("Level 1_1",Level1_1Dirs)
+    Level1_1.txtLook = ("")
+
     # The Level Meny will Return a level to call as a string ie "level0_1.menu()"
     # Eval will turn the string into that line of code
+    # Every time the levels menu gets called it is called here
 
     result = Level0_1.menu()
     while result != "exit":
         result = eval(result)
         
-
 
 Main()
