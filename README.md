@@ -22,7 +22,7 @@ By using classes in "Game02" it makes level creation easier but is harder to und
 
 - Was depating on what should be a seperate function ie roomMenu(), moveMenu() ect
 - As I was making more and more functions for the game is when I decided to try and use objects for the levels to streamline their creation
-- 
+- Lots of copy and pasting for the "Room" creation 
 
 
 ## Files:
