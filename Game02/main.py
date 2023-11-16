@@ -130,51 +130,66 @@ def Main():
 
     # Create the Level with the level name
 
-    Level0_1 = Level("Level0_1")
+
+    Level0_0 = Level("Level0_0")   #Starting Level
 
     # Create the Levels Direction in order North,South,West,East
 
-    Level0_1.dirs = (
-        Direction("North","Ouch, Rock","Level0_1"),
-        Direction("South","Entering Cave..","Level0_2"),
-        Direction("West","Ouch, Rock","Level0_1"),
-        Direction("East","You follow a path east","Level1_1"))
+    Level0_0.dirs = (
+        Direction("North","Ouch, Rock","Level0_0"),
+        Direction("South","Entering Cave..","Level0_1"),
+        Direction("West","Ouch, Rock","Level0_0"),
+        Direction("East","You follow a path east","Level1_0"))
 
     # Create the Look txt for the level
 
-    Level0_1.txtLook = ("You find yourself in a breathtaking forest","There are cliffs raised beside you","There is  a path to the south and the the east","There is a treasure chest in the hollow of a tree")
+    Level0_0.txtLook = ("You find yourself in a breathtaking forest","There are cliffs raised beside you","There is  a path to the south and the the east","There is a treasure chest in the hollow of a tree")
 
     # Create the Item for the level
 
-    Level0_1.item = Item("Leather Cap","You open the chest in the tree and...")
+    Level0_0.item = Item("Leather Cap","You open the chest in the tree and...")
 
 
-    Level0_2 = Level("Level0_2")
+    Level0_1 = Level("Level0_1") #Cave
 
-    Level0_2.dirs = (
-        Direction("North","Backing out of Cave","Level0_1"),
-        Direction("South","If you Move Gru will eat you","Level0_2"),
-        Direction("West","If you Move Gru will eat you","Level0_2"),
-        Direction("East","If you Move Gru will eat you","Level0_2"))
+    Level0_1.dirs = (
+        Direction("North","Backing out of Cave","Level0_0"),
+        Direction("South","If you Move Gru will eat you","Level0_1"),
+        Direction("West","If you Move Gru will eat you","Level0_1"),
+        Direction("East","If you Move Gru will eat you","Level0_1"))
     
-    Level0_2.txtLook = ("Its pitch black in this cave","You can see dalight far at the end of the cave","North is back the way you came, South is foward")
+    Level0_1.txtLook = ("Its pitch black in this cave","You can see dalight far at the end of the cave","North is back the way you came, South is foward")
+
+    Level1_0 = Level("Level1_0") #Foot Hills
+
+    Level1_0.dirs = (
+        Direction("North","Ouch, That Rock Hurt","Level1_0"),
+        Direction("South","You follow a path south","Level1_2"),
+        Direction("West","You follow a path west","Level0_0"),
+        Direction("East","You kick off your shoes and start to swim to the setting sun...\nYou change your mind, return and put your shoes back on","Level1_0"))
+    
+    Level1_0.txtLook = ("You are at the foot hils of a mountain range","North is a mountain","East is an ocean","There is a watch in the sand")
+
+    Level1_0.item = Item("Watch","You reach into the sand")
 
 
-    Level1_1 = Level("Level1_1")
+    Level1_1 = Level("Level1_1") #Canyon
 
     Level1_1.dirs = (
-        Direction("North","Backing out of Cave","Level1"),
-        Direction("South","If you Move Gru will eat you","Level2"),
-        Direction("West","If you Move Gru will eat you","Level2"),
-        Direction("East","If you Move Gru will eat you","Level2"))
+        Direction("North","Ouch, That Rock Hurt","Level1_0"),
+        Direction("South","You follow a path south","Level1_2"),
+        Direction("West","You follow a path west","Level0_0"),
+        Direction("East","You kick off your shoes and start to swim to the setting sun...\nYou change your mind, return and put your shoes back on","Level1_0"))
     
-    Level1_1.txtLook = ("")
+    Level1_1.txtLook = ("You are at the foot hils of a mountain range","North is a mountain","East is an ocean","There is a watch in the sand")
 
-    # The Level Meny will Return a level to call as a string ie "level0_1.menu()"
+    Level1_1.item = Item("Top Hat","You reach into the sand")    
+
+    # The Level Meny will Return a level to call as a string ie "Level0_0.menu()"
     # Eval will turn the string into that line of code
     # Every time the levels menu gets called it is called here
 
-    result = Level0_1.menu()
+    result = Level0_0.menu()
     while result != "exit":
         result = eval(result)
         

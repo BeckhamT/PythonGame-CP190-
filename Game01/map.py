@@ -31,7 +31,7 @@ def moveMenu():
     else:
         return userInput[0]
 
-#MENU FOR THE TAKE ACTION
+#MENU FOR THE TAKE ACTION returns either true or false, either they take the item or not
 def takeMenu(item):
     print(sectionDiv)
     print(item)
@@ -264,7 +264,7 @@ def Room1_1():
         else:
             print("You got the watch!")
             input("\nPRESS ENTER TO CONTINUE")
-            inv.topHat = takeMenu("Watch")
+            inv.topHat = takeMenu("Gold Top Hat")
         Room1_1()
     elif action == "exit":
         print(sectionDiv)
@@ -320,7 +320,7 @@ def Room1_2():
         Room1_2()
     elif action == "take":
         print(sectionDiv)
-        inv.leatherCap = takeMenu("Jeweled Skull")
+        inv.skull = takeMenu("Jeweled Skull")
         Room1_2()
     elif action == "exit":
         print(sectionDiv)
@@ -373,7 +373,7 @@ def Room2_1():
         Room2_1()
     elif action == "take":
         print(sectionDiv)
-        inv.leatherCap = takeMenu("A diamond")
+        inv.diamond = takeMenu("A diamond")
         Room2_1()
     elif action == "exit":
         print(sectionDiv)
@@ -431,7 +431,7 @@ def Room2_2():
         lookMenu(("A grass plain","East: a huge chasm in the ground","West and north are the paths", "A pot of gold in the grass","A glowing exit to the south"))
         Room2_2()
     elif action == "take":
-        inv.leatherCap = takeMenu("Pot of Gold")
+        inv.potGold = takeMenu("Pot of Gold")
         Room2_2()
     elif action == "exit":
         print(sectionDiv)

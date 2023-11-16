@@ -3,7 +3,7 @@ watch = False
 topHat = False
 diamond = False
 skull = False
-potOfGold = False
+potGold = False
 
 
 items = []
