@@ -25,6 +25,6 @@ class Item:
             input(txtContinue)
 
 
-nothing = Item.
+nothing = Item("nothing","Thre is nothing here")
 
 inv = []

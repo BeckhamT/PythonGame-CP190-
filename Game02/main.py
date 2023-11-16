@@ -29,7 +29,7 @@ class Level:
         self.name = name
         self.dirs = "this does nothing"
         self.txtLook = "this does nothing"
-        self.item = Item("nothing","nothing")
+        self.item = i.nothing
     def menu(self):
         options = ["move","take","look","inventory","exit"]
         print(sectionDiv)
@@ -128,7 +128,7 @@ def Main():
 
     # Create the Item for the level
 
-    Level0_1.item = Item("Leather Cap","You open the chest in the tree and...")
+    Level0_1.item = i.Item("Leather Cap","You open the chest in the tree and...")
 
 
     Level0_2 = Level("Level0_2")
