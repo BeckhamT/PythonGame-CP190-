@@ -2,8 +2,6 @@ txtDirection = "                  North\nYou can move:  West   East\n           
 sectionDiv = "\n" *3 +"***************************************************\n"
 txtContinue = "PRESS ENTER TO CONTINUE"
 
-
-
 class Item:
     def __init__(self,name,txt) -> None:
         self.name = name
@@ -25,6 +23,12 @@ class Item:
             input(txtContinue)
 
 
-nothing = Item("nothing","Thre is nothing here")
+nothing = Item("nothing","there is nothing here")
+leatherCap = Item("Leather Cap","You open the chest in the tree and...")
+watch = Item("Watch", "You try go to reach for in the sand and")
+topHat = Item("Golden Top Hat","")
+diamond = Item("Diamond","")
+skull = Item("Skull","")
+potGold = Item("Pot of Gold","")
 
-inv = []
+inventory = []
