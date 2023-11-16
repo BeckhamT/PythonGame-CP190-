@@ -445,3 +445,9 @@ def Room2_2():
         print("\nINVALID ACTION")
         input("\nPRESS ENTER TO CONTINUE")
         Room2_2()
+
+
+
+
+if inv.leatherCap == True:
+    print("Leather Cap")

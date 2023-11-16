@@ -6,4 +6,21 @@ skull = False
 potOfGold = False
 
 
+if leatherCap == True:
+    print ("Leather Cap")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 items = []
