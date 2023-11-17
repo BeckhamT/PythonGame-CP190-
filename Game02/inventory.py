@@ -2,11 +2,16 @@ txtDirection = "                  North\nYou can move:  West   East\n           
 sectionDiv = "\n" *3 +"***************************************************\n"
 txtContinue = "PRESS ENTER TO CONTINUE"
 
+itemList = []
+
+inventory = []
+
 class Item:
     def __init__(self,name,txt) -> None:
         self.name = name
         self.txt = txt
         self.have = False
+        itemList.append(self.name)
     def menu(self):
         if self.name != "nothing":
             print(sectionDiv+"\n"+self.txt+"\n")
@@ -15,13 +20,13 @@ class Item:
                 answer = input("\nWould you like to take? (y/n) ").lower()
                 if answer == "y": 
                     self.have = True
+                    inventory.append(self.name)
             else:
                 print("You already have this item")
                 input(txtContinue)
         else:
             print("\nThere is nothing to take\n")
             input(txtContinue)
-
 
 nothing = Item("nothing","there is nothing here")
 leatherCap = Item("Leather Cap","You open the chest in the tree and...")
@@ -31,4 +36,8 @@ diamond = Item("Diamond","")
 skull = Item("Skull","")
 potGold = Item("Pot of Gold","")
 
-inventory = []
+def Clear():
+    inventory = []
+    for i in itemList:
+        i.have = False
+    

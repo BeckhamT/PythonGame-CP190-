@@ -1,8 +1,9 @@
 from typing import Any
 import time
-import os
-import random
 import inventory as inv
+
+# main.py
+# Beckham Thompson
 
 #VARIBLES
 
@@ -12,7 +13,7 @@ txtContinue = "PRESS ENTER TO CONTINUE"
 
 
 class Direction:
-    def __init__(self,dir,txt,level) -> None:
+    def __init__(self,dir:str,txt:str,level:str) -> None:
         self.dir = dir
         self.txt = txt
         self.level = level
@@ -21,10 +22,10 @@ class Direction:
         input("\n"+txtContinue)
 
 class Level:
-    def __init__(self,name) -> None:
+    def __init__(self,name:str) -> None:
         self.name = name
-        self.dirs = "this does nothing"
-        self.txtLook = "this does nothing"
+        self.dirs:list[object] = "this does nothing"
+        self.txtLook:list[str] = ("this does nothing")
         self.item = inv.nothing
     def menu(self):
         options = ["move","take","look","inventory","exit"]
@@ -91,13 +92,13 @@ class Level:
         elif userInput == "w":
             self.west.show()
             if self.west.level == "self":
-                return (self.west + ".menu()")
+                return (self.name + ".menu()")
             else:
                 return (self.west.level + ".menu()")
         elif userInput == "e":
             self.east.show()
             if self.east.level == "self":
-                return (self.east + ".menu()")
+                return (self.name + ".menu()")
             else:
                 return (self.east.level + ".menu()")
             
@@ -115,33 +116,44 @@ class Level:
         self.item.menu()
     def invMenu(self):
         print("\nInventory:\n")
-        for i in inv.inv:
+        for i in inv.inventory:
             print(i)
         input("\n"+txtContinue)    
 
 class SubLevel:
-    def __init__(self,name,startLev,endLev,txt=None) -> None:
-        self.name = name
+    def __init__(self,type:str,startLev:str,endLev:str,yesTxt=None,optTxt=None) -> None:
+        self.type = type
         self.startLev = startLev
         self.endLev = endLev
-        self.text = txt
-        
+        self.yesTxt = yesTxt
+        self.optTxt = optTxt
+
     def menu(self):
-        if self.name == "option":
-            userInput = input("\n\nWould you like to enter (y/n)").lower()
+        if self.type == "option":
+            userInput = input("\n\n"+self.optTxt+" (y/n)").lower()
             if userInput == "y":
-                for i in self.txt:
+                for i in self.yesTxt:
                     print(i)
                     time.sleep(1)
                 input("\n"+txtContinue)
                 return (self.endLev+".menu()")
             else:
                 return (self.startLev+".menu()")
+        elif self.type == "end":
+            print(self.yesTxt)
+            inv.Clear()
+            return(self.startLev+".menu()")
         else: 
             return(self.startLev+".menu()")
 
 
 def Main():
+
+    ###### End Levels ######
+
+    WinLevel = SubLevel("end",None,"Level0_0","Congrats you win!")
+
+    DeathLevel = SubLevel("end",None,"Level0_0","You Died")
 
     txtRockHit = "Ouch, That Rock Hurt"
 
@@ -186,8 +198,8 @@ def Main():
     Level1_0.dirs = (
         Direction("North",txtRockHit,"Level0_0"),
         Direction("South","You follow path south...","Level1_1"),
-        Direction("West","You follow path west...","Level2"),
-        Direction("East","You kick off your shoes and start to swim to the setting sun...\nYou change your mind, return and put your shoes back on","Level2"))
+        Direction("West","You follow path west...","Level0_0"),
+        Direction("East",("You kick off your shoes and start to swim to the setting sun...\nYou change your mind, return and put your shoes back on"),"self"))
     
     Level1_0.txtLook = ("You are at the foot hils of a mountain range","North is a mountain","East is an ocean","There is a watch in the sand")
 
@@ -208,7 +220,7 @@ def Main():
 
     ###### Mysterious Portal ######
 
-    MysteriousPortal = SubLevel("option","Level1_2","Level0_0","You go through the portal","As you exit the other side of the portal you find yourself where you started...")
+    MysteriousPortal = SubLevel("option","Level1_2","Level0_0",("You go through the portal","As you exit the other side of the portal you find yourself where you started..."),"Would you like to go through the portal?")
 
 
     ###### Swamp ######
@@ -217,52 +229,54 @@ def Main():
 
     Level1_2.dirs = (
         Direction("North","You follow path north...","Level1_1"),
-        Direction("South","You aproach the mysterious portal","MysteriousPortal"),
-        Direction("West","","Level0"),
-        Direction("East","","Level0"))
+        Direction("South","This seems to be the end of the world","self"),
+        Direction("West","You walk into a cave...","Level0_1"),
+        Direction("East","You aproach the mysterious portal","MysteriousPortal"))
     
-    Level1_2.txtLook = ("")
+    Level1_2.txtLook = ("You are in a canyon in the ground","Abe Lincolns golden top hat","Paths to the north, south and east")
 
-    Level1_2.item = inv.watch
+    Level1_2.item = inv.topHat
 
     ###### Wasteland ######
     
     Level2_1 = Level("Level2_1")
 
     Level2_1.dirs = (
-        Direction("North","","Level0"),
-        Direction("South","","Level0"),
-        Direction("West","","Level0"),
-        Direction("East","","Level0"))
+        Direction("North","You see a sea serpent in the water and decide it is best to stay on land","self"),
+        Direction("South","You follow path south...","Level2_2"),
+        Direction("West","You follow path west...","Level1_1"),
+        Direction("East","You forgot your skis and cannot go that way","self"))
     
-    Level2_1.txtLook = ("")
+    Level2_1.txtLook = ("Volcanic wasteland","A diamond in a pile of ash","Paths to west and south", "Ocean to the north")
 
-    Level2_1.item = inv.watch
+    Level2_1.item = inv.diamond
 
     ###### Grass Plain ######
     
     Level2_2 = Level("Level2_2")
 
     Level2_2.dirs = (
-        Direction("North","","Level0"),
-        Direction("South","","Level0"),
+        Direction("North","You follow path north...","Level2_1"),
+        Direction("South","You follow a path south...","WinLevel"),
         Direction("West","","Level0"),
         Direction("East","","Level0"))
     
-    Level2_2.txtLook = ("")
+    Level2_2.txtLook = ("A grass plain","East: a huge chasm in the ground","West and north are the paths", "A pot of gold in the grass","A glowing exit to the south")
 
-    Level2_2.item = inv.watch
+    Level2_2.item = inv.potGold
+
+    ###### Casmn ######
+
+    Casm = SubLevel("option","Level2_2","DeathLevel","You Died","Would You Like to Dive?")
+
 
     # The Level Menu will Return a level to call as a string ie "level0_0.menu()"
     # Eval will turn the string into that line of code
     # Every time the levels menu gets called it is called here
 
-
+    print(inv.itemList)
     result = Level0_0.menu()
     while result != "exit":
-        result = eval(result)
-
-    
-        
+        result = eval(result)     
 
 Main()
