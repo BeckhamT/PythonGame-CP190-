@@ -120,18 +120,25 @@ class Level:
         input("\n"+txtContinue)    
 
 class SubLevel:
-    def __init__(self,name,startLev,endLev) -> None:
+    def __init__(self,name,startLev,endLev,txt=None) -> None:
         self.name = name
         self.startLev = startLev
         self.endLev = endLev
+        self.text = txt
         
     def menu(self):
         if self.name == "option":
-            userInput = input("Would you like to enter (y/n)").lower()
+            userInput = input("\n\nWould you like to enter (y/n)").lower()
             if userInput == "y":
+                for i in self.txt:
+                    print(i)
+                    time.sleep(1)
+                input("\n"+txtContinue)
                 return (self.endLev+".menu()")
             else:
                 return (self.startLev+".menu()")
+        else: 
+            return(self.startLev+".menu()")
 
 
 def Main():
@@ -201,7 +208,7 @@ def Main():
 
     ###### Mysterious Portal ######
 
-    MysteriousPortal = SubLevel("option","Level1_2","Level0_0")
+    MysteriousPortal = SubLevel("option","Level1_2","Level0_0","You go through the portal","As you exit the other side of the portal you find yourself where you started...")
 
 
     ###### Swamp ######
