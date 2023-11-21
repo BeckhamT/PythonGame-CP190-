@@ -35,6 +35,8 @@ topHat = Item("Golden Top Hat","")
 diamond = Item("Diamond","")
 skull = Item("Skull","")
 potGold = Item("Pot of Gold","")
+torch = Item("Torch","")
+sword = Item("Sword","You open the chest and..")
 
 def Clear():
     inventory = []

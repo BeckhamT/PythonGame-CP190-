@@ -118,15 +118,24 @@ class Level:
         input("\n"+txtContinue)    
 
 class SubLevel:
-    def __init__(self,type:str,startLev:str,endLev:str,yesTxt=None,optTxt=None) -> None:
+    def __init__(self,type:str,startLev:str,endLev:str,yesTxt=None,optTxt=None,noTxt=None,item=None) -> None:
         self.type = type
         self.startLev = startLev
         self.endLev = endLev
         self.yesTxt = yesTxt
+        self.noTxt = noTxt
         self.optTxt = optTxt
+        self.item = item
 
     def menu(self):
         if self.type == "option":
+            return(self.optionMenu())
+        elif self.type == "end":
+            return(self.endMenu())
+        elif self.type == "itemcheck":
+            return(self.itemCheck())
+
+    def optionMenu(self):
             userInput = input("\n\n"+self.optTxt+" (y/n)").lower()
             if userInput == "y":
                 for i in self.yesTxt:
@@ -135,13 +144,20 @@ class SubLevel:
                 input("\n"+txtContinue)
                 return (self.endLev+".menu()")
             else:
-                return (self.startLev+".menu()")
-        elif self.type == "end":
-            print(self.yesTxt)
-            inv.Clear()
+                return (self.startLev+".menu()")    
+    def endMenu(self):
+        print(self.yesTxt)
+        inv.Clear()
+        return(self.endLev+".menu()")
+    def itemCheck(self):
+        if eval(f"inv.{self.item}.have") == True:
+            print(f"{sectionDiv} \n {self.yesTxt}")
+            input(f"\n{txtContinue}")
             return(self.endLev+".menu()")
-        else: 
-            return(self.startLev+".menu()")
+        else:
+            print(f"{sectionDiv} \n {self.noTxt}")
+            input(f"\n{txtContinue}")
+            return (self.startLev+".menu()")
 
 
 ###### Level Creations #######
@@ -183,11 +199,55 @@ Level0_1 = Level("Level0_1")
 
 Level0_1.dirs = (
     Direction("North","Backing out of Cave","Level0_0"),
-    Direction("South","If you Move Gru will eat you","Level0_1"),
-    Direction("West","If you Move Gru will eat you","Level0_1"),
+    Direction("South","You desend deeper into the cave","Level0_2"),
+    Direction("West",txtRockHit,"self"),
+    Direction("East",txtRockHit,"self"))
+
+Level0_1.txtLook = ("Its pitch black in this cave","You can see light far at the end of the cave","North is back the way you came, South is foward")
+
+###### Cave2 ######
+
+Level0_2 = Level("Level0_2") 
+
+Level0_2.dirs = (
+    Direction("North","Backing out of Cave","Level0_1"),
+    Direction("South","You desend deeper into the cave","Level0_3"),
+    Direction("West",txtRockHit,"self"),
+    Direction("East",txtRockHit,"self"))
+
+Level0_2.txtLook = ("Two torches light up this section of the cave dimly","North is back the way you came, South is foward")
+
+Level0_2.item = inv.torch
+
+###### Cave3 ######
+
+Level0_3 = Level("Level0_3") 
+
+Level0_3.dirs = (
+    Direction("North","Backing out of Cave","Level0_2"),
+    Direction("South",txtRockHit,"Level0_1"),
+    Direction("West","You aproach the cave opening and...","CaveOpening"),
     Direction("East","If you Move Gru will eat you","Level0_1"))
 
-Level0_1.txtLook = ("Its pitch black in this cave","You can see dalight far at the end of the cave","North is back the way you came, South is foward")
+Level0_3.txtLook = ("There is a small opening to the West","North is back the way you came, South is foward")
+
+###### Cave Opening Item Check #######
+
+CaveOpening = SubLevel("itemcheck",startLev="Level0_3",endLev="CaveRoom",item="torch",yesTxt="You enter the cave opening",noTxt="You got scared because its too dark")
+
+###### Cave Room ######
+
+CaveRoom = Level("CaveRoom") 
+
+CaveRoom.dirs = (
+    Direction("North",txtRockHit,"self"),
+    Direction("South",txtRockHit,"self"),
+    Direction("West",txtRockHit,"self"),
+    Direction("East","You back out of the room","Level0_3"))
+
+CaveRoom.txtLook = ("A small cave room with no lights other than your torch","There is a chest at the back of the room","East back through the small opening")
+
+CaveRoom.item = inv.sword
 
 ###### Foot Hills ######
 
@@ -235,6 +295,7 @@ Level1_2.txtLook = ("You are in a canyon in the ground","Abe Lincolns golden top
 
 Level1_2.item = inv.topHat
 
+
 ###### Wasteland ######
 
 Level2_1 = Level("Level2_1")
@@ -267,5 +328,8 @@ Level2_2.item = inv.potGold
 
 Casmn = SubLevel("option","Level2_2","DeathLevel","You Died","Would You Like to Dive?")
 
-
 print("\nLevels Loaded\n")
+
+result = Level0_3.menu()
+while result != "exit":
+    result = eval(result)    

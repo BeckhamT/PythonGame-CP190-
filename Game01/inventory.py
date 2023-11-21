@@ -5,22 +5,4 @@ diamond = False
 skull = False
 potGold = False
 
-
-if leatherCap == True:
-    print ("Leather Cap")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 items = []

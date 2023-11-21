@@ -3,11 +3,12 @@ import os
 import random
 import inventory as inv
 
-#VARIBLES
-txtDirection = "                  North\nYou can move:  West   East\n                  South"
-sectionDiv = "\n" *3 +"***************************************************\n"
+#VARIBLES 
 username = "Player"
 
+#CONSTANTS
+txtDirection = "                  North\nYou can move:  West   East\n                  South"
+sectionDiv = "\n" *3 +"***************************************************\n"
 
 #Level MENU
 def LevelMenu(Levelname):
@@ -20,7 +21,7 @@ def LevelMenu(Levelname):
     return input("\nInput: ").lower()
 
 #MENU FOR THE MOVE ACTION
-def moveMenu():
+def MoveMenu():
     userInput = ""
     print(sectionDiv)
     print("MOVING\n")
@@ -32,7 +33,7 @@ def moveMenu():
         return userInput[0]
 
 #MENU FOR THE TAKE ACTION returns either true or false, either they take the item or not
-def takeMenu(item):
+def TakeMenu(item):
     print(sectionDiv)
     print(item)
     userInput = input("\nWould you like to take this item? (y/n) ").lower()
@@ -43,7 +44,7 @@ def takeMenu(item):
         return False
 
 #MENU FOR THE LOOK ACTION
-def lookMenu(text):
+def LookMenu(text):
     for i in text:
         print(i)
         time.sleep(1)
@@ -62,13 +63,13 @@ def Swim():
     print("You change your mind, return and put your shoes back on")
     input("\nPRESS ENTER TO CONTINUE")
 
-#################################################
+#FUNCTIONS FOR LEVELS
 
 def Level0_0():
     name = "Start"
     action = LevelMenu(name)
     if action == "move":
-        move = moveMenu()
+        move = MoveMenu()
         # moving north or west
         if move == "n" or move == "w":
             HitRock()
@@ -87,7 +88,7 @@ def Level0_0():
             input("\nPRESS ENTER TO CONTINUE")
             Level0_0()
     elif action == "look":
-        lookMenu(("You find yourself in a breathtaking forest","There are cliffs raised beside you","There is a path to the south and the the east","There is a treasure chest in the hollow of a tree"))
+        LookMenu(("You find yourself in a breathtaking forest","There are cliffs raised beside you","There is a path to the south and the the east","There is a treasure chest in the hollow of a tree"))
         Level0_0()
     elif action == "take":
         print(sectionDiv)
@@ -97,7 +98,7 @@ def Level0_0():
         else:
             print("\nYou open the chest in the tree to find a...")
             time.sleep(1)
-            inv.leatherCap = takeMenu("Leather Cap")
+            inv.leatherCap = TakeMenu("Leather Cap")
             input("\nPRESS ENTER TO CONTINUE")
         Level0_0()
     elif action == "exit":
@@ -111,13 +112,12 @@ def Level0_0():
         input("\nPRESS ENTER TO CONTINUE")
         Level0_0()
 
-#################################################
 
 def Level0_1():
     name = "Cave"
     action = LevelMenu(name)
     if action == "move":
-        move = moveMenu()
+        move = MoveMenu()
         if move == "n":
             print(sectionDiv)
             print("You back out of the cave...")
@@ -135,7 +135,7 @@ def Level0_1():
             Level0_1()
     elif action == "look":
         print(sectionDiv)
-        lookMenu(("Its pitch black in this cave","You can see dalight far at the end of the cave","North is back the way you came, South is foward"))
+        LookMenu(("Its pitch black in this cave","You can see dalight far at the end of the cave","North is back the way you came, South is foward"))
         Level0_1()
     elif action == "take":
         print("\nThat did nothing")
@@ -154,13 +154,12 @@ def Level0_1():
         input("\nPRESS ENTER TO CONTINUE")
         Level0_1()
 
-#################################################
 
 def Level1_0():
     name = "Foot Hills"
     action = LevelMenu(name)
     if action == "move":
-        move = moveMenu()
+        move = MoveMenu()
         if move == "n":
             print(sectionDiv)
             HitRock()
@@ -187,7 +186,7 @@ def Level1_0():
     elif action == "look":
         print(sectionDiv)
         looktxt = ("You are at the foot hils of a mountain range","North is a mountain","East is an ocean","There is a watch in the sand")
-        lookMenu(looktxt)
+        LookMenu(looktxt)
         Level1_0()
     elif action == "take":
         print(sectionDiv)
@@ -206,7 +205,7 @@ def Level1_0():
             else:
                 print("You got the watch!")
                 input("\nPRESS ENTER TO CONTINUE")
-                inv.watch = takeMenu("Watch")
+                inv.watch = TakeMenu("Watch")
             Level1_0()
             print(sectionDiv)
 
@@ -223,13 +222,12 @@ def Level1_0():
         input("\nPRESS ENTER TO CONTINUE")
         Level1_0()
 
-#################################################
 
 def Level1_1():
     name = "Canyon"
     action = LevelMenu(name)
     if action == "move":
-        move = moveMenu()
+        move = MoveMenu()
         if move == "n":
             print(sectionDiv)
             print("You follow path north...")
@@ -256,7 +254,7 @@ def Level1_1():
             Level1_1()
     elif action == "look":
         print(sectionDiv)
-        lookMenu(("You are in a canyon in the ground","Abe Lincolns golden top hat","Paths to the north, south and east"))
+        LookMenu(("You are in a canyon in the ground","Abe Lincolns golden top hat","Paths to the north, south and east"))
         Level1_1()
     elif action == "take":
         if inv.topHat == True:
@@ -265,7 +263,7 @@ def Level1_1():
         else:
             print("You got the watch!")
             input("\nPRESS ENTER TO CONTINUE")
-            inv.topHat = takeMenu("Golden Top Hat")
+            inv.topHat = TakeMenu("Golden Top Hat")
         Level1_1()
     elif action == "exit":
         print(sectionDiv)
@@ -280,13 +278,12 @@ def Level1_1():
         input("\nPRESS ENTER TO CONTINUE")
         Level1_1()
 
-#################################################
 
 def Level1_2():
     name = "Swamp"
     action = LevelMenu(name)
     if action == "move":
-        move = moveMenu()
+        move = MoveMenu()
         if move == "n":
             print(sectionDiv)
             print("You follow path north...")
@@ -317,11 +314,11 @@ def Level1_2():
             Level1_2()
     elif action == "look":
         print(sectionDiv)
-        lookMenu(("You are in a swamp","There is a jeweled skull in the muck","There is a mysterious portal to the east. ", "Paths to the north and west"))
+        LookMenu(("You are in a swamp","There is a jeweled skull in the muck","There is a mysterious portal to the east. ", "Paths to the north and west"))
         Level1_2()
     elif action == "take":
         print(sectionDiv)
-        inv.skull = takeMenu("Jeweled Skull")
+        inv.skull = TakeMenu("Jeweled Skull")
         Level1_2()
     elif action == "exit":
         print(sectionDiv)
@@ -336,13 +333,12 @@ def Level1_2():
         input("\nPRESS ENTER TO CONTINUE")
         Level1_2()
 
-#################################################
 
 def Level2_1():
     name = "Wasteland"
     action = LevelMenu(name)
     if action == "move":
-        move = moveMenu()
+        move = MoveMenu()
         if move == "n":
             print(sectionDiv)
             print("You see a sea serpent in the water and decide it is best to stay on land")
@@ -370,11 +366,11 @@ def Level2_1():
             Level2_1()
     elif action == "look":
         print(sectionDiv)
-        lookMenu(("Volcanic wasteland","A diamond in a pile of ash","Paths to west and south", "Ocean to the north"))
+        LookMenu(("Volcanic wasteland","A diamond in a pile of ash","Paths to west and south", "Ocean to the north"))
         Level2_1()
     elif action == "take":
         print(sectionDiv)
-        inv.diamond = takeMenu("A diamond")
+        inv.diamond = TakeMenu("A diamond")
         Level2_1()
     elif action == "exit":
         print(sectionDiv)
@@ -389,13 +385,12 @@ def Level2_1():
         input("\nPRESS ENTER TO CONTINUE")
         Level2_1()
 
-#################################################
 
 def Level2_2():
     name = "Grass Plain"
     action = LevelMenu(name)
     if action == "move":
-        move = moveMenu()
+        move = MoveMenu()
         if move == "n":
             print(sectionDiv)
             print("You follow path north...")
@@ -429,10 +424,10 @@ def Level2_2():
             Level2_2()
     elif action == "look":
         print(sectionDiv)
-        lookMenu(("A grass plain","East: a huge chasm in the ground","West and north are the paths", "A pot of gold in the grass","A glowing exit to the south"))
+        LookMenu(("A grass plain","East: a huge chasm in the ground","West and north are the paths", "A pot of gold in the grass","A glowing exit to the south"))
         Level2_2()
     elif action == "take":
-        inv.potOfGold = takeMenu("Pot of Gold")
+        inv.potOfGold = TakeMenu("Pot of Gold")
         Level2_2()
     elif action == "exit":
         print(sectionDiv)
