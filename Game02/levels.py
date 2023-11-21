@@ -4,9 +4,12 @@ import time
 # levels.py
 # Beckham Thompson
 
+# CONSTANT
+
 txtDirection = "                  North\nYou can move:  West   East\n                  South"
 sectionDiv = "\n" *3 +"***************************************************\n"
 txtContinue = "PRESS ENTER TO CONTINUE"
+txtRockHit = "Ouch, That Rock Hurt"
 
 
 class Direction:
@@ -134,6 +137,8 @@ class SubLevel:
             return(self.endMenu())
         elif self.type == "itemcheck":
             return(self.itemCheck())
+        elif self.type == "win":
+            return(self.winMenu())
 
     def optionMenu(self):
             userInput = input("\n\n"+self.optTxt+" (y/n)").lower()
@@ -158,6 +163,12 @@ class SubLevel:
             print(f"{sectionDiv} \n {self.noTxt}")
             input(f"\n{txtContinue}")
             return (self.startLev+".menu()")
+    def winMenu(self):
+        print("You win!!")
+        print("\nInventory:\n")
+        for i in inv.inventory:
+            print(i)
+        input("\n"+txtContinue) 
 
 
 ###### Level Creations #######
@@ -165,11 +176,10 @@ class SubLevel:
 
 ###### End Levels ######
 
-WinLevel = SubLevel("end",None,"Level0_0","Congrats you win!")
+WinLevel = SubLevel("win",None,"Level0_0")
 
 DeathLevel = SubLevel("end",None,"Level0_0","You Died")
 
-txtRockHit = "Ouch, That Rock Hurt"
 
 ###### Start ######
 
@@ -273,7 +283,7 @@ Level1_1.dirs = (
     Direction("West",txtRockHit,"self"),
     Direction("East","","Level2_1"))
 
-Level1_1.txtLook = ("")
+Level1_1.txtLook = (("You are in a canyon in the ground","Abe Lincolns golden top hat","Paths to the north, south and east"))
 
 
 ###### Mysterious Portal ######
@@ -326,10 +336,6 @@ Level2_2.item = inv.potGold
 
 ###### Casmn ######
 
-Casmn = SubLevel("option","Level2_2","DeathLevel","You Died","Would You Like to Dive?")
+Casmn = SubLevel("option","Level2_2","DeathLevel","","Would You Like to Dive?")
 
 print("\nLevels Loaded\n")
-
-result = Level0_3.menu()
-while result != "exit":
-    result = eval(result)    

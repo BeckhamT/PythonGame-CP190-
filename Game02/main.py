@@ -13,6 +13,7 @@ sectionDiv = "\n" *3 +"***************************************************\n"
 txtContinue = "PRESS ENTER TO CONTINUE"
 username = "Player"
 
+   
 def Main():
 
     print("Welcome to My game!")
@@ -23,8 +24,9 @@ def Main():
     # Every time the levels menu gets called it is called here
 
     result = lev.Level0_0.menu()
-    while result != "exit":
-        result = eval("lev."+result)    
-
-
+    while result != "lev.win.menu()":
+        result = eval("lev."+result)
+    Win()
+    
+    
 Main()
