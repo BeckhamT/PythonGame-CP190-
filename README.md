@@ -45,9 +45,11 @@ By using classes in "Game02" it makes level creation easier but is harder to und
 
 ## Files:
 
-  *should probably seperate classes into other files*
+  main.py runs all the levels
 
-  main.py contains all the code required to run the game
+  levls.py contains all the levels and level classes
+
+  inventory.py contains the players inventory as well as the item class
 
   
 

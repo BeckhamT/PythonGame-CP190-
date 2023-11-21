@@ -11,7 +11,7 @@ class Item:
         self.name = name
         self.txt = txt
         self.have = False
-        itemList.append(self.name)
+        itemList.append(self)
     def menu(self):
         if self.name != "nothing":
             print(sectionDiv+"\n"+self.txt+"\n")

@@ -139,10 +139,12 @@ class SubLevel:
         elif self.type == "end":
             print(self.yesTxt)
             inv.Clear()
-            return(self.startLev+".menu()")
+            return(self.endLev+".menu()")
         else: 
             return(self.startLev+".menu()")
 
+
+###### Level Creations #######
 
 
 ###### End Levels ######
@@ -254,8 +256,8 @@ Level2_2 = Level("Level2_2")
 Level2_2.dirs = (
     Direction("North","You follow path north...","Level2_1"),
     Direction("South","You follow a path south...","WinLevel"),
-    Direction("West","","Level0"),
-    Direction("East","","Level0"))
+    Direction("West","You follow a path west...","Level1_2"),
+    Direction("East","You aproach the large Casmn","Casmn"))
 
 Level2_2.txtLook = ("A grass plain","East: a huge chasm in the ground","West and north are the paths", "A pot of gold in the grass","A glowing exit to the south")
 
@@ -263,7 +265,7 @@ Level2_2.item = inv.potGold
 
 ###### Casmn ######
 
-Casm = SubLevel("option","Level2_2","DeathLevel","You Died","Would You Like to Dive?")
+Casmn = SubLevel("option","Level2_2","DeathLevel","You Died","Would You Like to Dive?")
 
 
 print("\nLevels Loaded\n")
